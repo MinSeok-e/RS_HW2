@@ -1,0 +1,59 @@
+{
+  "seed": 2020,
+  "valid_fraction": 0.2,
+  "topk": 20,
+  "feedback": "all observed ratings are binary positives",
+  "split": "per-user chronological; last ceil(0.2*n) interactions held out",
+  "validation_candidates": "fit-active items excluding fit-observed items; cold targets remain in denominator",
+  "ease_lambdas": [
+    1.0,
+    10.0,
+    30.0,
+    100.0,
+    300.0,
+    1000.0
+  ],
+  "neumf_defaults": {
+    "mf_dim": 16,
+    "mlp_dim": 32,
+    "hidden": [
+      32,
+      16,
+      8
+    ],
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "negatives": 4,
+    "batch_size": 2048,
+    "max_epochs": 100,
+    "patience": 10
+  },
+  "neumf_trials": [
+    {},
+    {
+      "mf_dim": 32
+    },
+    {
+      "mf_dim": 32,
+      "mlp_dim": 64,
+      "hidden": [
+        64,
+        32,
+        16
+      ]
+    },
+    {
+      "mf_dim": 32,
+      "learning_rate": 0.003
+    },
+    {
+      "mf_dim": 32,
+      "negatives": 8
+    },
+    {
+      "mf_dim": 32,
+      "weight_decay": 1e-05
+    }
+  ],
+  "smoke": false
+}

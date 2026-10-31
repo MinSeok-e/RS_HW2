@@ -1,0 +1,17 @@
+{
+  "ease": {
+    "checkpoint_reproduces_csv_exactly": true,
+    "sha256": "7f56173205df6f12b444f9b0f2088eb3b3c22b607117492abf4145fa587da2af"
+  },
+  "neumf": {
+    "checkpoint_reproduces_csv_exactly": true,
+    "sha256": "56f05a066234622e762b48b166f77029f8621fbac0fd62995a7db05f23d57140"
+  },
+  "validation_checkpoint": {
+    "ndcg@20": 0.13147144224172333,
+    "recall@20": 0.12741949493929494,
+    "hit@20": 0.6147540983606558,
+    "users": 610
+  },
+  "slurm_job_id": "80730"
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "trial": "neumf_00",
+    "best_epoch": 7,
+    "epochs_run": 17,
+    "ndcg@20": 0.12430352924249866,
+    "recall@20": 0.12046401890953178,
+    "hit@20": 0.6114754098360655,
+    "users": 610,
+    "seconds": 29.83793387701735,
+    "config": {
+      "mf_dim": 16,
+      "mlp_dim": 32,
+      "hidden": [
+        32,
+        16,
+        8
+      ],
+      "learning_rate": 0.001,
+      "weight_decay": 0.0,
+      "negatives": 4,
+      "batch_size": 2048,
+      "max_epochs": 100,
+      "patience": 10
+    }
+  },
+  {
+    "trial": "neumf_01",
+    "best_epoch": 13,
+    "epochs_run": 23,
+    "ndcg@20": 0.12980693396327042,
+    "recall@20": 0.12741582924514772,
+    "hit@20": 0.6475409836065574,
+    "users": 610,
+    "seconds": 39.68887566495687,
+    "config": {
+      "mf_dim": 32,
+      "mlp_dim": 32,
+      "hidden": [
+        32,
+        16,
+        8
+      ],
+      "learning_rate": 0.001,
+      "weight_decay": 0.0,
+      "negatives": 4,
+      "batch_size": 2048,
+      "max_epochs": 100,
+      "patience": 10
+    }
+  },
+  {
+    "trial": "neumf_02",
+    "best_epoch": 6,
+    "epochs_run": 16,
+    "ndcg@20": 0.12645820108306594,
+    "recall@20": 0.12311573750342934,
+    "hit@20": 0.5950819672131148,
+    "users": 610,
+    "seconds": 28.14423047984019,
+    "config": {
+      "mf_dim": 32,
+      "mlp_dim": 64,
+      "hidden": [
+        64,
+        32,
+        16
+      ],
+      "learning_rate": 0.001,
+      "weight_decay": 0.0,
+      "negatives": 4,
+      "batch_size": 2048,
+      "max_epochs": 100,
+      "patience": 10
+    }
+  },
+  {
+    "trial": "neumf_03",
+    "best_epoch": 4,
+    "epochs_run": 14,
+    "ndcg@20": 0.11955173676927716,
+    "recall@20": 0.11409783379678604,
+    "hit@20": 0.6360655737704918,
+    "users": 610,
+    "seconds": 24.144894554279745,
+    "config": {
+      "mf_dim": 32,
+      "mlp_dim": 32,
+      "hidden": [
+        32,
+        16,
+        8
+      ],
+      "learning_rate": 0.003,
+      "weight_decay": 0.0,
+      "negatives": 4,
+      "batch_size": 2048,
+      "max_epochs": 100,
+      "patience": 10
+    }
+  },
+  {
+    "trial": "neumf_04",
+    "best_epoch": 13,
+    "epochs_run": 23,
+    "ndcg@20": 0.12876048796869535,
+    "recall@20": 0.13212516618281694,
+    "hit@20": 0.6573770491803279,
+    "users": 610,
+    "seconds": 63.39890602603555,
+    "config": {
+      "mf_dim": 32,
+      "mlp_dim": 32,
+      "hidden": [
+        32,
+        16,
+        8
+      ],
+      "learning_rate": 0.001,
+      "weight_decay": 0.0,
+      "negatives": 8,
+      "batch_size": 2048,
+      "max_epochs": 100,
+      "patience": 10
+    }
+  },
+  {
+    "trial": "neumf_05",
+    "best_epoch": 16,
+    "epochs_run": 26,
+    "ndcg@20": 0.13147144224172333,
+    "recall@20": 0.12741949493929494,
+    "hit@20": 0.6147540983606558,
+    "users": 610,
+    "seconds": 46.80774644110352,
+    "config": {
+      "mf_dim": 32,
+      "mlp_dim": 32,
+      "hidden": [
+        32,
+        16,
+        8
+      ],
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05,
+      "negatives": 4,
+      "batch_size": 2048,
+      "max_epochs": 100,
+      "patience": 10
+    }
+  }
+]

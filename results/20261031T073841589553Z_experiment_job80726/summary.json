@@ -1,0 +1,105 @@
+{
+  "status": "completed",
+  "run_id": "20261031T073841589553Z_experiment_job80726",
+  "smoke": false,
+  "source_commit": "69ff1d26c9d7f4a1920c5a48dfe4fe8e7ba62222",
+  "data": {
+    "file_sha256": {
+      "train.csv": "547030222b06c2e7a8710515e72dfd8c635ba3d6fbfc13e571a2dc45a0afe4c2",
+      "test.csv": "824336a9937e0ed385f9a5a74b11c7a67f2437fb261ddca07fdc05059928e570",
+      "sample_submission.csv": "1049b343370fdc9947c2e28a46354454ee1c010ae3ea5ae682c60c6ed0286f79"
+    },
+    "interactions": 80621,
+    "users": 610,
+    "items": 8237,
+    "test_users": 588,
+    "fit_interactions": 64246,
+    "validation_interactions": 16375,
+    "validation_users": 610,
+    "fit_active_items": 7144,
+    "validation_only_items": 1093,
+    "cold_validation_interactions": 1235,
+    "validation_users_with_only_cold_targets": 0,
+    "rating_values": [
+      0.5,
+      1.0,
+      1.5,
+      2.0,
+      2.5,
+      3.0,
+      3.5,
+      4.0,
+      4.5,
+      5.0
+    ],
+    "test_id_userId_mismatches": 582,
+    "split_sha256": "d5aecc2fc6b2c8b991afc65bbdc1c88e63254f51ac9b5d8a0ce68ebc139f23c7"
+  },
+  "popularity_reference": {
+    "ndcg@20": 0.1004530989489112,
+    "recall@20": 0.08732692231351365,
+    "hit@20": 0.521311475409836,
+    "users": 610
+  },
+  "ease": {
+    "regularization": 300.0,
+    "ndcg@20": 0.15500816004052462,
+    "recall@20": 0.15895465442090104,
+    "hit@20": 0.7032786885245902,
+    "users": 610,
+    "seconds": 0.6504633980803192
+  },
+  "neumf": {
+    "trial": "neumf_05",
+    "best_epoch": 16,
+    "epochs_run": 26,
+    "ndcg@20": 0.13147144224172333,
+    "recall@20": 0.12741949493929494,
+    "hit@20": 0.6147540983606558,
+    "users": 610,
+    "seconds": 46.80774644110352,
+    "config": {
+      "mf_dim": 32,
+      "mlp_dim": 32,
+      "hidden": [
+        32,
+        16,
+        8
+      ],
+      "learning_rate": 0.001,
+      "weight_decay": 1e-05,
+      "negatives": 4,
+      "batch_size": 2048,
+      "max_epochs": 100,
+      "patience": 10
+    }
+  },
+  "submissions": {
+    "ease": {
+      "path": "/mnt/nodes/a-rtx3090-04/semester/1/RS/RS_HW2/submissions/20261031T073841589553Z_experiment_job80726_ease.csv",
+      "sha256": "7f56173205df6f12b444f9b0f2088eb3b3c22b607117492abf4145fa587da2af",
+      "checks": {
+        "rows": 588,
+        "items_per_user": 20,
+        "id_order_matches": true,
+        "duplicates": 0,
+        "unknown_items": 0,
+        "seen_items": 0
+      }
+    },
+    "neumf": {
+      "path": "/mnt/nodes/a-rtx3090-04/semester/1/RS/RS_HW2/submissions/20261031T073841589553Z_experiment_job80726_neumf.csv",
+      "sha256": "56f05a066234622e762b48b166f77029f8621fbac0fd62995a7db05f23d57140",
+      "checks": {
+        "rows": 588,
+        "items_per_user": 20,
+        "id_order_matches": true,
+        "duplicates": 0,
+        "unknown_items": 0,
+        "seen_items": 0
+      }
+    }
+  },
+  "seconds": 268.8844631598331,
+  "completed_utc": "2026-10-31T07:43:10.617125+00:00"
+}

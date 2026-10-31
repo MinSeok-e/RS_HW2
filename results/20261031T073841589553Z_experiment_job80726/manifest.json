@@ -1,0 +1,111 @@
+{
+  "run_id": "20261031T073841589553Z_experiment_job80726",
+  "started_utc": "2026-10-31T07:38:41.631540+00:00",
+  "source_commit": "69ff1d26c9d7f4a1920c5a48dfe4fe8e7ba62222",
+  "source_root": "/mnt/nodes/a-rtx3090-04/semester/1/RS/RS_HW2/snapshots/69ff1d26c9d7f4a1920c5a48dfe4fe8e7ba62222_80726",
+  "source_sha256": {
+    "rs_hw2/__init__.py": "eae0e0f7c1ca3234f11b9e0549488c700d44296c2edd0c437595437eac1a3900",
+    "rs_hw2/data.py": "809f66cc301cadb659fddeaab61d2414d1bcecfd53a649cf0ed35ecbaf4e35fc",
+    "rs_hw2/evaluation.py": "aa402b31b7c68ec45ebb101538b2c20b9e201a87ae10fe0c11450e50ef29a291",
+    "rs_hw2/models.py": "40cbcf1fa94d8a44c5177b26d54a163e76fb6071ec20c83af4961bf7ba7ad798",
+    "rs_hw2/provenance.py": "73986bbecd29c4ffc58aa508ee571452789c18a83c6aa025edfd3b233d9ec477",
+    "rs_hw2/run.py": "268c239e18551e8d34a241d6d9a7d51eeab7989afc5db2172086daf4976ff966",
+    "scripts/submit.sh": "58746d32696f8aed397feb4ae67a5129e1dd6498ed160cf375b217031ced1fea",
+    "tests/test_core.py": "fabfb4f2a0c95d83f4a8347077274163b819a8bb04fa83501971fbc763d545a7",
+    "configs/experiment.json": "95dacb48bf5bc4db51c1694a4b86bd11693fece1fd6b4ed3403269ed256ad131",
+    "slurm/experiment.sbatch": "554fd831a884aa674e21edb4edd479448364f3623211ccda43df9d287a71a12e",
+    "slurm/probe.sbatch": "0d6d7eda2567c312553f1fc0061df33f9d2c76195feb44a53f86bf5f98477e37",
+    "slurm/setup.sbatch": "faa86191856853b9cec44d2172234e6d56509563c723fc50c501ece21afb30bf",
+    "slurm/setup_kaggle.sbatch": "bd17d9ac7354ca9fa2ac37b6922be189eb36542b9312b3b149b6310c80590f21"
+  },
+  "command": [
+    "/mnt/nodes/a-rtx3090-04/semester/1/RS/RS_HW2/snapshots/69ff1d26c9d7f4a1920c5a48dfe4fe8e7ba62222_80726/rs_hw2/run.py",
+    "--root",
+    "/home/minseok/data/semester/1/RS/RS_HW2",
+    "--config",
+    "configs/experiment.json",
+    "--device",
+    "cuda"
+  ],
+  "hostname": "a-rtx3090-01",
+  "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+  "slurm": {
+    "SLURM_JOB_ID": "80726",
+    "SLURM_JOB_NODELIST": "a-rtx3090-01",
+    "SLURM_CPUS_PER_TASK": "4",
+    "SLURM_JOB_PARTITION": "gpu24",
+    "SLURM_JOB_QOS": "normal"
+  },
+  "python": "3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]",
+  "python_prefix": "/home/minseok/.venvs/rs-hw2",
+  "base_prefix": "/home/minseok/.conda/envs/bot",
+  "packages": {
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "torch": "2.3.1",
+    "matplotlib": "3.8.4"
+  },
+  "config": {
+    "seed": 2020,
+    "valid_fraction": 0.2,
+    "topk": 20,
+    "feedback": "all observed ratings are binary positives",
+    "split": "per-user chronological; last ceil(0.2*n) interactions held out",
+    "validation_candidates": "fit-active items excluding fit-observed items; cold targets remain in denominator",
+    "ease_lambdas": [
+      1.0,
+      10.0,
+      30.0,
+      100.0,
+      300.0,
+      1000.0
+    ],
+    "neumf_defaults": {
+      "mf_dim": 16,
+      "mlp_dim": 32,
+      "hidden": [
+        32,
+        16,
+        8
+      ],
+      "learning_rate": 0.001,
+      "weight_decay": 0.0,
+      "negatives": 4,
+      "batch_size": 2048,
+      "max_epochs": 100,
+      "patience": 10
+    },
+    "neumf_trials": [
+      {},
+      {
+        "mf_dim": 32
+      },
+      {
+        "mf_dim": 32,
+        "mlp_dim": 64,
+        "hidden": [
+          64,
+          32,
+          16
+        ]
+      },
+      {
+        "mf_dim": 32,
+        "learning_rate": 0.003
+      },
+      {
+        "mf_dim": 32,
+        "negatives": 8
+      },
+      {
+        "mf_dim": 32,
+        "weight_decay": 1e-05
+      }
+    ],
+    "smoke": false
+  },
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 3090",
+    "cuda": "12.1"
+  }
+}

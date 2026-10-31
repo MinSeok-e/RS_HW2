@@ -1,0 +1,10 @@
+{
+  "authentication": "ok",
+  "competition": "skku-esw-4024-recommender-system",
+  "data_files": [
+    "sample_submission.csv",
+    "test.csv",
+    "train.csv"
+  ],
+  "existing_submissions": 0
+}

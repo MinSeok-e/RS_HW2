@@ -1,0 +1,22 @@
+{
+  "best_epoch": 16,
+  "epochs_run": 16,
+  "seconds": 26.492643473669887,
+  "metrics": null,
+  "config": {
+    "mf_dim": 32,
+    "mlp_dim": 32,
+    "hidden": [
+      32,
+      16,
+      8
+    ],
+    "learning_rate": 0.001,
+    "weight_decay": 1e-05,
+    "negatives": 4,
+    "batch_size": 2048,
+    "max_epochs": 100,
+    "patience": 10
+  },
+  "checkpoint": "/mnt/nodes/a-rtx3090-04/semester/1/RS/RS_HW2/checkpoints/20261031T073841589553Z_experiment_job80726/neumf_full.pt"
+}

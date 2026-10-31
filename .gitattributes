@@ -1,0 +1,2 @@
+# Generated PDFs must remain binary, including ReportLab ASCII headers.
+*.pdf binary

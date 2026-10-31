@@ -5,9 +5,9 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=6G
+#SBATCH --mem=3G
 #SBATCH --gres=gpu:1
-#SBATCH --time=02:00:00
+#SBATCH --time=00:30:00
 #SBATCH --chdir=/home/minseok/data/semester/1/RS/RS_HW2
 #SBATCH --output=/home/minseok/data/semester/1/RS/RS_HW2/logs/experiment-%j.out
 #SBATCH --error=/home/minseok/data/semester/1/RS/RS_HW2/logs/experiment-%j.err

@@ -1,0 +1,17 @@
+JobID                         JobName      State ExitCode    Elapsed  AllocCPUS     ReqMem        NodeList 
+------------ ------------------------ ---------- -------- ---------- ---------- ---------- --------------- 
+80717                rs-hw2-env-probe  COMPLETED      0:0   00:00:02          2         1G    a-rtx3090-02 
+80718                    rs-hw2-setup  COMPLETED      0:0   00:00:23          2         4G    a-rtx3090-01 
+80724                 rs-kaggle-setup  COMPLETED      0:0   00:00:34          2         1G    a-rtx3090-02 
+80725                    rs-hw2-smoke  COMPLETED      0:0   00:00:26          4         6G    a-rtx3090-01 
+80726               rs-hw2-experiment  COMPLETED      0:0   00:04:37          4         6G    a-rtx3090-01 
+80727                   rs-hw2-report     FAILED      1:0   00:00:01          2         1G    a-rtx3090-02 
+80730                   rs-hw2-verify  COMPLETED      0:0   00:00:07          2         3G    a-rtx3090-01 
+80731             rs-hw2-report-setup  COMPLETED      0:0   00:00:53          2         1G    a-rtx3090-02 
+80732                   rs-hw2-kaggle  COMPLETED      0:0   00:00:03          2         1G    a-rtx3090-02 
+80733                   rs-hw2-kaggle  COMPLETED      0:0   00:00:09          2         1G    a-rtx3090-02 
+80737                   rs-hw2-kaggle  COMPLETED      0:0   00:00:04          2         1G    a-rtx3090-02 
+80738                   rs-hw2-report  COMPLETED      0:0   00:00:01          2         1G    a-rtx3090-02 
+80739                   rs-hw2-report  COMPLETED      0:0   00:00:07          2         1G    a-rtx3090-02 
+80740             rs-hw2-report-setup  COMPLETED      0:0   00:00:04          2         1G    a-rtx3090-02 
+80741                   rs-hw2-report  COMPLETED      0:0   00:00:03          2         1G    a-rtx3090-04 

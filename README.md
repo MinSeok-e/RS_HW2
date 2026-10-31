@@ -6,7 +6,7 @@ Kaggle: [SKKU ESW4024 Recommender System](https://www.kaggle.com/competitions/sk
 
 ## 과제와 실험 상태
 
-Q1은 EASE, Q2는 NeuMF로 수행한다. 실행 결과와 Kaggle 점수는 실제 실행 후 기록한다.
+Q1은 EASE, Q2는 NeuMF로 수행한다. 본실험과 Kaggle 제출을 완료했으며 아래 결과에 기록했다.
 공통 데이터 처리, 평가, 제출 생성과 Slurm 실행 코드를 포함한다.
 
 ## 실행 환경
@@ -66,7 +66,7 @@ bash scripts/submit.sh --smoke
 bash scripts/submit.sh
 ```
 
-`slurm/experiment.sbatch`는 GPU 1개, CPU 4개, RAM 6GB, 최대 2시간을 요청한다.
+`slurm/experiment.sbatch`는 GPU 1개, CPU 4개, RAM 3GB, 최대 30분을 요청한다.
 시험 실행은 `sbatch --time=00:10:00 ... --smoke`로 짧게 요청할 수도 있다.
 실행 전 9개 핵심 테스트를 수행한다. 모든 모델과 설정은 같은 split SHA256을 공유한다.
 
@@ -89,3 +89,59 @@ bash scripts/submit.sh
 
 본 저장소의 모델은 위 수식/구조를 바탕으로 새로 작성한 NumPy/PyTorch 구현이다.
 원저자 구현의 sampled-negative HR/NDCG@10 평가 대신 이 과제의 공통 full-catalog NDCG@20 평가를 사용한다.
+
+## 실제 실험 결과 (2026-10-31)
+
+학습 소스: `69ff1d26c9d7f4a1920c5a48dfe4fe8e7ba62222`.
+본실험은 Slurm **80726**, GPU 시험 실행은 **80725**, 저장 모델 재현 검사는 **80730**이다.
+
+| 모델 | 선택 설정 | Validation NDCG@20 | Kaggle Public NDCG@20 | Kaggle 제출 ID |
+|---|---|---:|---:|---:|
+| 인기순 참고 기준 | 학습 상호작용 수 | 0.100453 | 제출하지 않음 | — |
+| EASE | lambda=300 | **0.155008** | **0.11419** | 57831658 |
+| NeuMF | GMF=32, MLP=32, hidden=[32,16,8], lr=0.001, negatives=4, weight_decay=1e-5 | 0.131471 | 0.09812 | 57831660 |
+
+NeuMF는 검증 최적 16 epoch를 선택했다. 26 epoch에서 조기 종료했고, 전체 데이터 재학습은 16 epoch 수행했다.
+Kaggle public 점수로 재튜닝하지 않고 검증으로 선택한 두 모델을 각각 한 번 제출했다.
+팀 이름은 `MinseokJeong_2026713004`이며 두 제출 모두 `COMPLETE` 상태다.
+
+- [본실험 요약](results/20261031T073841589553Z_experiment_job80726/summary.json)
+- [EASE 전체 탐색](results/20261031T073841589553Z_experiment_job80726/ease_sweep.csv)
+- [NeuMF 전체 탐색](results/20261031T073841589553Z_experiment_job80726/neumf_sweep.csv)
+- [저장 모델 재현 검증](results/20261031T073841589553Z_experiment_job80726/artifact_verification.json)
+- [공식 Kaggle 제출·점수 기록](submissions/kaggle_records.json)
+- [EASE 실제 제출 CSV](submissions/20261031T073841589553Z_experiment_job80726_ease.csv)
+- [NeuMF 실제 제출 CSV](submissions/20261031T073841589553Z_experiment_job80726_neumf.csv)
+
+![EASE 검증 결과](results/20261031T073841589553Z_experiment_job80726/ease_validation.png)
+![NeuMF 검증 곡선](results/20261031T073841589553Z_experiment_job80726/neumf_validation.png)
+
+두 최종 CSV를 저장된 모델로 다시 생성했을 때 파일 SHA256과 바이트가 완전히 일치했다.
+검증용 NeuMF 체크포인트도 저장된 NDCG/Recall/Hit 점수를 재현했다.
+본실험 요청 RAM은 6GB였고 실제 최대 RSS는 약 1.1GB였다. 이후 제출 스크립트 요청량을 3GB/30분으로 조정했다.
+
+## Kaggle 및 보고서 마무리
+
+공식 Kaggle CLI는 별도 환경 `/home/minseok/.venvs/rs-kaggle`에 설치했다.
+인증은 Git 저장소 밖의 `~/.kaggle/access_token`을 사용한다. 토큰 값은 로그/보고서에 기록하지 않는다.
+
+```bash
+# 계산 노드에서 API 호출; status는 읽기 전용
+sbatch slurm/kaggle.sbatch check
+sbatch slurm/kaggle.sbatch status
+# 최종 파일 두 개를 제출한다. 이미 기록된 제출은 중복 제출하지 않는다.
+sbatch slurm/kaggle.sbatch submit
+```
+
+보고서 작성자: **2026713004 / Minseok Jeong**.
+`report/screenshots/ease.png`, `report/screenshots/neumf.png`에 실제 Kaggle 웹사이트의 모델별 점수 화면을 저장한다.
+그 뒤 다음 명령으로 보고서를 생성한다.
+
+```bash
+sbatch slurm/report.sbatch
+```
+
+보고서는 ReportLab과 NanumGothic 폰트를 사용한다. 렌더링 환경/폰트는 `slurm/setup_report.sbatch`로 계산 노드에 준비한다.
+점수 또는 스크린샷이 빠진 경우 PDF 이름에 `_DRAFT`를 붙이고 해당 항목을 명시한다.
+두 항목이 모두 준비되면 `report/RS_HW2_2026713004_Minseok_Jeong.pdf`를 생성한다.
+완료 상태는 [report/status.json](report/status.json)에서 확인한다.

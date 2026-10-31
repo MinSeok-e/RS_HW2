@@ -1,0 +1,61 @@
+Collecting reportlab
+  Downloading reportlab-5.1.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting pypdf
+  Downloading pypdf-6.21.4-py3-none-any.whl.metadata (7.6 kB)
+Collecting pymupdf
+  Downloading pymupdf-2.0-cp311-abi3-manylinux_2_28_x86_64.whl.metadata (25 kB)
+Collecting pillow>=9.0.0 (from reportlab)
+  Downloading pillow-13.0.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting charset-normalizer (from reportlab)
+  Using cached charset_normalizer-3.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+Collecting networkx (from pymupdf)
+  Downloading networkx-3.6.1-py3-none-any.whl.metadata (6.8 kB)
+Collecting numpy (from pymupdf)
+  Downloading numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting onnxruntime (from pymupdf)
+  Downloading onnxruntime-1.31.1-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (5.8 kB)
+Collecting pyyaml (from pymupdf)
+  Using cached pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting pymupdf-layout==2.0 (from pymupdf)
+  Downloading pymupdf_layout-2.0-py3-none-any.whl.metadata (368 bytes)
+Collecting psutil (from pymupdf)
+  Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl.metadata (22 kB)
+Collecting tabulate (from pymupdf)
+  Downloading tabulate-0.10.0-py3-none-any.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.8/40.8 kB 2.6 MB/s eta 0:00:00
+Collecting pymupdf4llm==2.0 (from pymupdf)
+  Downloading pymupdf4llm-2.0-py3-none-any.whl.metadata (360 bytes)
+Collecting flatbuffers (from onnxruntime->pymupdf)
+  Downloading flatbuffers-25.12.19-py2.py3-none-any.whl.metadata (1.0 kB)
+Collecting packaging (from onnxruntime->pymupdf)
+  Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting protobuf>=4.25.8 (from onnxruntime->pymupdf)
+  Using cached protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+Downloading reportlab-5.1.0-py3-none-any.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 36.3 MB/s eta 0:00:00
+Downloading pypdf-6.21.4-py3-none-any.whl (410 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 410.4/410.4 kB 17.7 MB/s eta 0:00:00
+Downloading pymupdf-2.0-cp311-abi3-manylinux_2_28_x86_64.whl (68.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 68.9/68.9 MB 12.1 MB/s eta 0:00:00
+Downloading pymupdf_layout-2.0-py3-none-any.whl (927 bytes)
+Downloading pymupdf4llm-2.0-py3-none-any.whl (904 bytes)
+Downloading pillow-13.0.0-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 39.9 MB/s eta 0:00:00
+Using cached charset_normalizer-3.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (269 kB)
+Downloading networkx-3.6.1-py3-none-any.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 29.6 MB/s eta 0:00:00
+Downloading numpy-2.4.6-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.9/16.9 MB 31.3 MB/s eta 0:00:00
+Downloading onnxruntime-1.31.1-cp311-cp311-manylinux_2_28_x86_64.whl (23.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 23.8/23.8 MB 27.5 MB/s eta 0:00:00
+Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl (155 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 155.6/155.6 kB 8.8 MB/s eta 0:00:00
+Using cached pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (806 kB)
+Downloading tabulate-0.10.0-py3-none-any.whl (39 kB)
+Using cached protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+Downloading flatbuffers-25.12.19-py2.py3-none-any.whl (26 kB)
+Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Installing collected packages: pymupdf4llm, pymupdf-layout, flatbuffers, tabulate, pyyaml, pypdf, psutil, protobuf, pillow, packaging, numpy, networkx, charset-normalizer, reportlab, onnxruntime, pymupdf
+Successfully installed charset-normalizer-3.5.2 flatbuffers-25.12.19 networkx-3.6.1 numpy-2.4.6 onnxruntime-1.31.1 packaging-26.3 pillow-13.0.0 protobuf-7.36.2 psutil-7.2.2 pymupdf-2.0 pymupdf-layout-2.0 pymupdf4llm-2.0 pypdf-6.21.4 pyyaml-6.0.3 reportlab-5.1.0 tabulate-0.10.0
+NanumGothic-Regular.ttf 76f45ef4a6bcff344c837c95a7dcc26e017e38b5846d5ae0cdcb5b86be2e2d31
+NanumGothic-Bold.ttf f96298f9fb18e364d2370f4c3ce948ac67a2b61af992d7234bc15c42b033c674

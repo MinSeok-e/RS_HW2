@@ -12,10 +12,4 @@ kaggle.json
 access_token
 .DS_Store
 /RS HW2-2.docx
-/report/*.aux
-/report/*.log
-/report/*.out
-/report/*.toc
-/report/previews/
-/report/build-output.txt
-/report/RS_HW2_2026713004_Minseok_Jeong_DRAFT.tex
+/report/

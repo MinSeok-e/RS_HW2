@@ -29,6 +29,5 @@ bash scripts/submit.sh          # 전체 실험
 - [rs_hw2/](rs_hw2/): 데이터 처리, 모델, 평가 코드
 - [results/](results/), [logs/](logs/): 실험 결과와 실행 기록
 - [submissions/](submissions/): 제출 CSV와 Kaggle 점수 기록
-- [보고서 초안](report/RS_HW2_2026713004_Minseok_Jeong_DRAFT.pdf): 모델 설명과 실험 분석 (Kaggle 화면 캡처 추가 예정)
 
 참고: [EASE 논문](https://arxiv.org/abs/1905.03375), [NeuMF 논문](https://arxiv.org/abs/1708.05031), [NeuMF 원저자 구현](https://github.com/hexiangnan/neural_collaborative_filtering).

@@ -2,146 +2,33 @@
 
 2026713004 / Minseok Jeong
 
-Kaggle: [SKKU ESW4024 Recommender System](https://www.kaggle.com/competitions/skku-esw-4024-recommender-system/overview)
-
-## 과제와 실험 상태
-
-Q1은 EASE, Q2는 NeuMF로 수행한다. 본실험과 Kaggle 제출을 완료했으며 아래 결과에 기록했다.
-공통 데이터 처리, 평가, 제출 생성과 Slurm 실행 코드를 포함한다.
-
-## 실행 환경
-
-Python 3.10, NumPy 1.26.4, SciPy 1.13.1, PyTorch 2.3.1 (CUDA 12.1), Matplotlib 3.8.4.
-이 서버에서는 `/home/minseok/.venvs/rs-hw2`를 사용한다. 이 venv는 기존 사용자 환경
-`/home/minseok/.conda/envs/bot`의 패키지를 읽기 전용으로 참조한다. 기존 환경은 수정하지 않았다.
-정확한 실행 버전과 경로는 실행별 `manifest.json`, 전체 패키지는 `logs/environment-freeze.txt`에 남긴다.
-독립 환경을 재현할 때는 계산 노드에서 `environment.yml` 또는 `requirements.txt`를 사용한다.
-
-**로그인 노드에서는 Python, 설치, 학습, 테스트를 실행하지 않는다. 모든 실행은 Slurm 계산 노드에서 한다.**
-
-## 데이터와 검증 설계
-
-- 대회가 제공한 `data/train.csv`, `data/test.csv`, `data/sample_submission.csv`만 사용한다.
-- 원본 MovieLens를 추가 다운로드하거나 사용자/영화 ID를 외부 데이터와 연결하지 않는다.
-- 제공된 train.csv의 ID를 정렬하여 내부 인덱스로 매핑한다. 이 단계에서는 ID의 존재만 사용한다.
-- 모든 평점을 관측 상호작용 1로 변환한다. 미관측을 확정적인 비선호라고 가정하지 않는다.
-- 사용자별 `time_idx` 오름차순으로 마지막 `ceil(0.2*n)`개를 검증에 두고 나머지를 학습한다.
-- validation은 사용자별 binary NDCG@20의 평균이다. 보조 지표로 Recall@20과 Hit@20을 기록한다.
-- 학습에서 한 번 이상 나타난 모든 영화를 후보로 평가하며, 해당 사용자의 학습 영화를 제외한다.
-- 검증에서만 등장한 영화는 모델이 학습할 수 없으므로 추천에서 제외하되, 정답 수/IDCG에는 포함한다.
-  따라서 cold item 정답을 삭제하여 점수를 높이지 않는다. 관련 수치는 `data_summary.json`에 기록한다.
-- 점수가 같으면 원래 movieId가 작은 순서로 추천한다. 테스트 id와 userId는 별도로 매핑한다.
-- Kaggle 숨김 정답의 분할/관련성 세부 규칙은 공개 안내에 없으므로 위 기준은 명시적인 로컬 검증 가정이다.
-- `time_idx`는 분할에 사용한다. 이 HW2의 두 모델은 순차 모델이 아니다.
-
-## 모델
-
-### EASE
-
-`min ||X-XB||_F^2 + lambda ||B||_F^2`, `diag(B)=0`을 푼다.
-정확한 해를 Woodbury 항등식으로 사용자 공간에서 계산하여 큰 아이템 정방행렬을 만들지 않는다.
-`A=(XX^T+lambda I)^-1`, `Pdiag=(1-diag(X^TAX))/lambda`일 때
-학습 사용자에 대한 점수는 `X - AX/Pdiag`이다. 작은 행렬에서 원래 아이템 공간 해와 일치하는지 테스트한다.
-정규화 계수 `[1, 10, 30, 100, 300, 1000]` 중 검증 NDCG@20으로 선택한다.
-
-### NeuMF
-
-별도의 사용자/아이템 임베딩을 사용하는 GMF(element-wise product)와 MLP(ReLU)를 결합하고
-선형 출력의 logit에 `BCEWithLogitsLoss`를 적용한다. 사전학습 없이 처음부터 학습한다.
-학습 positive마다 fit-active 영화 중 그 사용자의 학습 positive가 아닌 영화를 균일 복원추출한다.
-Negative sampling에서 validation 정답은 조회하지 않는다. 미관측 중 일부가 실제 선호일 가능성은 남는다.
-Adam을 사용하며 weight_decay 설정은 전체 파라미터에 적용되는 L2 페널티다.
-최대 100 epoch, 검증 NDCG@20이 10 epoch 연속 개선되지 않으면 중단한다.
-같은 시드 2020으로 `configs/experiment.json`의 6개 설정을 비교한다.
-최적 설정을 선택한 뒤 제공된 train.csv 전체로 다시 학습하며 학습 epoch 수는 검증 최적 epoch로 고정한다.
+[SKKU ESW4024 추천시스템 과제](https://www.kaggle.com/competitions/skku-esw-4024-recommender-system/overview): Q1은 EASE, Q2는 NeuMF를 구현했다.
 
 ## 실행
 
-저장소의 코드/설정을 먼저 커밋한다. 각 Slurm 작업은 지정한 커밋을 `snapshots/`에 추출해 실행하므로
-대기 중 또는 실행 중 작업 디렉터리를 편집해도 실제 실행 소스가 바뀌지 않는다.
+대회에서 제공한 `train.csv`, `test.csv`, `sample_submission.csv`를 `data/`에 넣는다.
+실험 설정은 [configs/experiment.json](configs/experiment.json), 패키지 목록은 [requirements.txt](requirements.txt)에 있다.
+현재 서버의 Slurm 환경에서 코드와 설정을 커밋한 뒤 실행한다.
 
 ```bash
-# 로그인 노드: 커밋된 코드 제출
-bash scripts/submit.sh --smoke
-bash scripts/submit.sh
+bash scripts/submit.sh --smoke  # 시험 실행
+bash scripts/submit.sh          # 전체 실험
 ```
 
-`slurm/experiment.sbatch`는 GPU 1개, CPU 4개, RAM 3GB, 최대 30분을 요청한다.
-시험 실행은 `sbatch --time=00:10:00 ... --smoke`로 짧게 요청할 수도 있다.
-실행 전 9개 핵심 테스트를 수행한다. 모든 모델과 설정은 같은 split SHA256을 공유한다.
+## 결과
 
-## 산출물
+사용자별 마지막 20% 상호작용을 시간순으로 분리해 검증하고, 선택한 설정으로 전체 학습 데이터를 다시 학습했다.
 
-- `results/<run_id>/`: 설정, 데이터 해시, 코드 커밋, 패키지 버전, 전체 로그, 실험 결과와 그래프.
-- `checkpoints/<run_id>/`: 검증/최종 모델. Git 추적 제외.
-- `submissions/<run_id>_{ease,neumf}.csv`: 모델별 최종 제출 파일. smoke 파일은 대회에 제출하지 않는다.
-- `logs/`: Slurm 표준 출력/오류와 환경 기록.
-- `report/`: 보고서 원본 및 PDF. Kaggle 점수·스크린샷 확인 후 최종화한다.
+| 모델 | Validation NDCG@20 | Kaggle Public NDCG@20 |
+|---|---:|---:|
+| EASE | 0.155008 | 0.11419 |
+| NeuMF | 0.131471 | 0.09812 |
 
-제출 파일은 588개 테스트 행의 id 순서, 중복 없는 영화 20개, 원래 movieId 복원,
-학습에서 이미 본 영화의 제외를 자동 검사한다. 데이터가 달라지면 행 수는 실제 test.csv에 맞춘다.
+## 파일
 
-## 출처
+- [rs_hw2/](rs_hw2/): 데이터 처리, 모델, 평가 코드
+- [results/](results/), [logs/](logs/): 실험 결과와 실행 기록
+- [submissions/](submissions/): 제출 CSV와 Kaggle 점수 기록
+- [보고서 초안](report/RS_HW2_2026713004_Minseok_Jeong_DRAFT.pdf): 모델 설명과 실험 분석 (Kaggle 화면 캡처 추가 예정)
 
-- Harald Steck. *Embarrassingly Shallow Autoencoders for Sparse Data*, WWW 2019. https://arxiv.org/abs/1905.03375
-- Xiangnan He et al. *Neural Collaborative Filtering*, WWW 2017. https://arxiv.org/abs/1708.05031
-- NeuMF 원저자 구현(모델 구성 참고): https://github.com/hexiangnan/neural_collaborative_filtering
-
-본 저장소의 모델은 위 수식/구조를 바탕으로 새로 작성한 NumPy/PyTorch 구현이다.
-원저자 구현의 sampled-negative HR/NDCG@10 평가 대신 이 과제의 공통 full-catalog NDCG@20 평가를 사용한다.
-
-## 실제 실험 결과 (2026-10-31)
-
-학습 소스: `69ff1d26c9d7f4a1920c5a48dfe4fe8e7ba62222`.
-본실험은 Slurm **80726**, GPU 시험 실행은 **80725**, 저장 모델 재현 검사는 **80730**이다.
-
-| 모델 | 선택 설정 | Validation NDCG@20 | Kaggle Public NDCG@20 | Kaggle 제출 ID |
-|---|---|---:|---:|---:|
-| 인기순 참고 기준 | 학습 상호작용 수 | 0.100453 | 제출하지 않음 | — |
-| EASE | lambda=300 | **0.155008** | **0.11419** | 57831658 |
-| NeuMF | GMF=32, MLP=32, hidden=[32,16,8], lr=0.001, negatives=4, weight_decay=1e-5 | 0.131471 | 0.09812 | 57831660 |
-
-NeuMF는 검증 최적 16 epoch를 선택했다. 26 epoch에서 조기 종료했고, 전체 데이터 재학습은 16 epoch 수행했다.
-Kaggle public 점수로 재튜닝하지 않고 검증으로 선택한 두 모델을 각각 한 번 제출했다.
-팀 이름은 `MinseokJeong_2026713004`이며 두 제출 모두 `COMPLETE` 상태다.
-
-- [본실험 요약](results/20261031T073841589553Z_experiment_job80726/summary.json)
-- [EASE 전체 탐색](results/20261031T073841589553Z_experiment_job80726/ease_sweep.csv)
-- [NeuMF 전체 탐색](results/20261031T073841589553Z_experiment_job80726/neumf_sweep.csv)
-- [저장 모델 재현 검증](results/20261031T073841589553Z_experiment_job80726/artifact_verification.json)
-- [공식 Kaggle 제출·점수 기록](submissions/kaggle_records.json)
-- [EASE 실제 제출 CSV](submissions/20261031T073841589553Z_experiment_job80726_ease.csv)
-- [NeuMF 실제 제출 CSV](submissions/20261031T073841589553Z_experiment_job80726_neumf.csv)
-
-![EASE 검증 결과](results/20261031T073841589553Z_experiment_job80726/ease_validation.png)
-![NeuMF 검증 곡선](results/20261031T073841589553Z_experiment_job80726/neumf_validation.png)
-
-두 최종 CSV를 저장된 모델로 다시 생성했을 때 파일 SHA256과 바이트가 완전히 일치했다.
-검증용 NeuMF 체크포인트도 저장된 NDCG/Recall/Hit 점수를 재현했다.
-본실험 요청 RAM은 6GB였고 실제 최대 RSS는 약 1.1GB였다. 이후 제출 스크립트 요청량을 3GB/30분으로 조정했다.
-
-## Kaggle 및 보고서 마무리
-
-공식 Kaggle CLI는 별도 환경 `/home/minseok/.venvs/rs-kaggle`에 설치했다.
-인증은 Git 저장소 밖의 `~/.kaggle/access_token`을 사용한다. 토큰 값은 로그/보고서에 기록하지 않는다.
-
-```bash
-# 계산 노드에서 API 호출; status는 읽기 전용
-sbatch slurm/kaggle.sbatch check
-sbatch slurm/kaggle.sbatch status
-# 최종 파일 두 개를 제출한다. 이미 기록된 제출은 중복 제출하지 않는다.
-sbatch slurm/kaggle.sbatch submit
-```
-
-보고서 작성자: **2026713004 / Minseok Jeong**.
-`report/screenshots/ease.png`, `report/screenshots/neumf.png`에 실제 Kaggle 웹사이트의 모델별 점수 화면을 저장한다.
-그 뒤 다음 명령으로 보고서를 생성한다.
-
-```bash
-sbatch slurm/report.sbatch
-```
-
-보고서는 ReportLab과 NanumGothic 폰트를 사용한다. 렌더링 환경/폰트는 `slurm/setup_report.sbatch`로 계산 노드에 준비한다.
-점수 또는 스크린샷이 빠진 경우 PDF 이름에 `_DRAFT`를 붙이고 해당 항목을 명시한다.
-두 항목이 모두 준비되면 `report/RS_HW2_2026713004_Minseok_Jeong.pdf`를 생성한다.
-완료 상태는 [report/status.json](report/status.json)에서 확인한다.
+참고: [EASE 논문](https://arxiv.org/abs/1905.03375), [NeuMF 논문](https://arxiv.org/abs/1708.05031), [NeuMF 원저자 구현](https://github.com/hexiangnan/neural_collaborative_filtering).

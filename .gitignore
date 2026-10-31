@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+/data/
+/saved/
+/checkpoints/
+*.pt
+*.pth
+.env
+kaggle.json
+.DS_Store
+/RS HW2-2.docx

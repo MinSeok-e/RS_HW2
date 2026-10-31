@@ -1,0 +1,6 @@
+Python: 3.10.20 (main, Jun 11 2026, 15:17:37) [GCC 14.3.0]
+Venv: /home/minseok/.venvs/rs-hw2 Base: /home/minseok/.conda/envs/bot
+torch: 2.3.1 CUDA: 12.1
+numpy: 1.26.4 scipy: 1.13.1 matplotlib: 3.8.4
+GPU: NVIDIA GeForce RTX 3090
+GPU operation: OK

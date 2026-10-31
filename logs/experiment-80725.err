@@ -1,0 +1,14 @@
+test_bad_scores_and_too_few_candidates_rejected (test_core.CoreTests) ... ok
+test_ease_user_space_matches_original_item_space (test_core.CoreTests) ... ok
+test_ndcg_hand_calculation_and_macro_average (test_core.CoreTests) ... ok
+test_negative_sampling_excludes_fit_positives_and_inactive_items (test_core.CoreTests) ... ok
+test_neumf_has_separate_embeddings_and_trains (test_core.CoreTests) ... ok
+test_perfect_and_zero_ndcg (test_core.CoreTests) ... ok
+test_seen_and_inactive_exclusion_with_stable_ties (test_core.CoreTests) ... ok
+test_split_is_chronological_disjoint_and_exhaustive (test_core.CoreTests) ... ok
+test_submission_preserves_test_id_to_user_mapping (test_core.CoreTests) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 3.025s
+
+OK

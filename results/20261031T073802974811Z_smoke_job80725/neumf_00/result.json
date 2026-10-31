@@ -1,0 +1,27 @@
+{
+  "best_epoch": 2,
+  "epochs_run": 2,
+  "seconds": 4.884555860888213,
+  "metrics": {
+    "ndcg@20": 0.10037572101993507,
+    "recall@20": 0.08663073080626041,
+    "hit@20": 0.5311475409836065,
+    "users": 610
+  },
+  "config": {
+    "mf_dim": 16,
+    "mlp_dim": 32,
+    "hidden": [
+      32,
+      16,
+      8
+    ],
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "negatives": 4,
+    "batch_size": 2048,
+    "max_epochs": 2,
+    "patience": 10
+  },
+  "checkpoint": "/mnt/nodes/a-rtx3090-04/semester/1/RS/RS_HW2/checkpoints/20261031T073802974811Z_smoke_job80725/neumf_00.pt"
+}

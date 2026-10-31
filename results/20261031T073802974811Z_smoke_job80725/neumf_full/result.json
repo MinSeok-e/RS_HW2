@@ -1,0 +1,22 @@
+{
+  "best_epoch": 2,
+  "epochs_run": 2,
+  "seconds": 3.0048103472217917,
+  "metrics": null,
+  "config": {
+    "mf_dim": 16,
+    "mlp_dim": 32,
+    "hidden": [
+      32,
+      16,
+      8
+    ],
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "negatives": 4,
+    "batch_size": 2048,
+    "max_epochs": 2,
+    "patience": 10
+  },
+  "checkpoint": "/mnt/nodes/a-rtx3090-04/semester/1/RS/RS_HW2/checkpoints/20261031T073802974811Z_smoke_job80725/neumf_full.pt"
+}

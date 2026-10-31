@@ -1,0 +1,2 @@
+trial,best_epoch,epochs_run,ndcg@20,recall@20,hit@20,users,seconds,config
+neumf_00,2,2,0.10037572101993507,0.08663073080626041,0.5311475409836065,610,4.884555860888213,"{""batch_size"": 2048, ""hidden"": [32, 16, 8], ""learning_rate"": 0.001, ""max_epochs"": 2, ""mf_dim"": 16, ""mlp_dim"": 32, ""negatives"": 4, ""patience"": 10, ""weight_decay"": 0.0}"
